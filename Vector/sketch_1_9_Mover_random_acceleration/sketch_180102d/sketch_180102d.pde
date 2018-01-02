@@ -1,4 +1,4 @@
-int buttonValuePressed = 1;
+import java.util.*;
 
 class Mover {
   
@@ -7,35 +7,28 @@ class Mover {
   PVector acceleration;
   
   float topspeed;
+  float tx, ty;
   
   Mover(){
     location = new PVector(random(width/2), random(height/2));
     velocity = new PVector(0,0);
     acceleration = new PVector(0.001, 0);
     topspeed = 10;
+    tx = 0;
+    ty = 10000;
   }
-  
-  void setAcceleration(int keyPressedValue){
-    if(keyPressedValue == 38){
-      println("add");
-      buttonValuePressed = 1;
-    } else if(keyPressedValue == 40) {
-      println("sub");
-      buttonValuePressed = 0;
-    }
-  }
-  
+
   void update(){
-    println(buttonValuePressed);
-    if(buttonValuePressed == 1){
-      velocity.add(acceleration);
-      // acce to velo
-      location.add(velocity);
-    } else if(buttonValuePressed == 0){
-      velocity.sub(acceleration);
-      location.add(velocity);
-    }
+    acceleration.x = map(noise(tx), 0, 1, 0, 10);
+    acceleration.y = map(noise(ty), 0, 1, 0, 10);
+    println(acceleration.x, acceleration.y);
+
+    tx += 0.01;
+    ty += 0.01;
+
+    velocity.add(acceleration);
     velocity.limit(topspeed);
+    location.add(velocity);
   }
   
   void display(){

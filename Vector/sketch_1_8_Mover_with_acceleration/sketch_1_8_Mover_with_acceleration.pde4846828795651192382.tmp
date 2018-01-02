@@ -26,16 +26,13 @@ class Mover {
   }
   
   void update(){
-    println(buttonValuePressed);
+    velocity.limit(topspeed);
     if(buttonValuePressed == 1){
-      velocity.add(acceleration);
-      // acce to velo
       location.add(velocity);
     } else if(buttonValuePressed == 0){
-      velocity.sub(acceleration);
-      location.add(velocity);
+      location.sub(velocity);
     }
-    velocity.limit(topspeed);
+    
   }
   
   void display(){

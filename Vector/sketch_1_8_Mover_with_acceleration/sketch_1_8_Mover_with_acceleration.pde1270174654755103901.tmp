@@ -17,25 +17,15 @@ class Mover {
   
   void setAcceleration(int keyPressedValue){
     if(keyPressedValue == 38){
-      println("add");
-      buttonValuePressed = 1;
+      velocity.add(acceleration);
     } else if(keyPressedValue == 40) {
-      println("sub");
-      buttonValuePressed = 0;
+      velocity.sub(acceleration);
     }
   }
   
   void update(){
-    println(buttonValuePressed);
-    if(buttonValuePressed == 1){
-      velocity.add(acceleration);
-      // acce to velo
-      location.add(velocity);
-    } else if(buttonValuePressed == 0){
-      velocity.sub(acceleration);
-      location.add(velocity);
-    }
     velocity.limit(topspeed);
+    location.add(velocity);
   }
   
   void display(){
