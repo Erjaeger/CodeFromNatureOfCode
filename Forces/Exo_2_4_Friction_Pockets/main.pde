@@ -14,19 +14,18 @@ void setup() {
 
 void draw() {
   background(255);
+  
+  fill(244, 66, 229);
+  rect(0, height/2, 100, 100);
+  
+  fill(244, 157, 65);
+  rect(width-100, height/2, 100, 100);
 
   for (int i = 0; i < movers.length; i++) {
 
     PVector wind = new PVector(0.01, 0);
     PVector gravity = new PVector(0, 0.1*movers[i].mass);
     
-    float c = 0.01;
-    PVector friction = movers[i].velocity.copy();
-    friction.mult(-1);
-    friction.normalize();
-    friction.mult(c);
-
-    movers[i].applyForce(friction);
     movers[i].applyForce(wind);
     movers[i].applyForce(gravity);
 

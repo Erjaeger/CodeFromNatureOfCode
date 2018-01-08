@@ -16,6 +16,26 @@ class Mover {
 
   
   void update(){
+    
+    if(location.x > 0 && location.x < 100 && location.y > height/2 && location.y < height/2 + 100){
+      println("apply");
+      float c = 0.1;
+      PVector friction = velocity.copy();
+      friction.mult(-1);
+      friction.normalize();
+      friction.mult(c);
+      this.applyForce(friction);    
+    }
+    
+    if(location.x > width-100 && location.x < width && location.y > height/2 && location.y < height/2 + 100){
+      println("applySpeedUp");
+      PVector speedUp = acceleration.copy();
+      speedUp.mult(10);
+      this.applyForce(speedUp);    
+    }
+    
+    
+    
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
