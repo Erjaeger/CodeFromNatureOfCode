@@ -8,11 +8,19 @@ class Mover {
   float aVelocity=0;
   float aAcceleration=0.01;
   
+  float r = 0;
+  float g = 0;
+  float b = 0;
+  
   Mover(){
-    location = new PVector(random(0,width), random(0, height));
+    location = new PVector(65, 280);
     velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
     mass=1;
+    
+    r = random(0, 255);
+    g = random(0, 255);
+    b = random(0, 255);
   }
   
   void update(){
@@ -33,7 +41,7 @@ class Mover {
   
   void display(){
     stroke(0);
-    fill(175, 200);
+    fill(r, g, b);
     rectMode(CENTER);
     pushMatrix();
     translate(location.x, location.y);
