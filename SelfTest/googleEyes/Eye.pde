@@ -17,10 +17,10 @@ class Eye {
     PVector mouse = new PVector(mouseX, mouseY); 
     PVector newLoc = location.copy();
     newLoc.sub(mouse);//Get the position of the mouse from the center
-    background(125);
-    line(width/2, height/2, mouse.x, mouse.y);
+    
+    line(location.x, location.y, mouse.x, mouse.y);
   
-    angle = newLoc.heading(); //Get the angle of the "ball" from the center 
+    angle = newLoc.heading()/2.0 + HALF_PI; //Get the angle of the "ball" from the center 
 
     float x = r * cos(angle);
     float y = r * sin(angle);
