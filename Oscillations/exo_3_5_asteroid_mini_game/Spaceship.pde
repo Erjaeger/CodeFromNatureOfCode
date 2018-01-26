@@ -42,7 +42,7 @@ class Spaceship {
     float y = sin(angle-PI/2);
     PVector normDir = new PVector(x, y);
     normDir.normalize();
-    normDir.mult(2);
+    normDir.mult(0.1);
     applyForce(normDir);
   }
   
@@ -56,7 +56,7 @@ class Spaceship {
 
   void display() {
     pushMatrix();
-    translate(location.x, location.y);
+    translate(location.x, location.y+15);
     spaceshipShape = createShape(GROUP);
     commandShape = createShape(TRIANGLE, 0, 0, -20, 30, 20, 30);
     leftMotor = createShape(RECT, -15, 30, 10, 5);
