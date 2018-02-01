@@ -12,16 +12,15 @@ function draw() {
 }
 
 function Walker(){
-  this.x = width/2;
-  this.y = height/2;
+  this.v = createVector(width/2, height/2);
 
   this.walk = function(){
-    this.x += random(-1, 1);
-    this.y += random(-1, 1);
+    this.v.x += random(-1, 1);
+    this.v.y += random(-1, 1);
   }
 
   this.display = function(){
     fill(255);
-    ellipse(this.x, this.y, 16, 16);
+    ellipse(this.v.x, this.v.y, 16, 16);
   }
 }
