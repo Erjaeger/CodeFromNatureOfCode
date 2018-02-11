@@ -1,6 +1,7 @@
 var w;
 
 function setup() {
+  frameRate(60);
   createCanvas(640, 360);
   w = new Walker();
 }
@@ -14,11 +15,15 @@ function draw() {
 function Walker(){
   this.pos = createVector(width/2, 0);
   this.vel = createVector(0, 0);
-  this.acc = createVector(0, 0.1);
+  this.acc = p5.Vector.fromAngle(PI/2);
+  this.acc.setMag(0.2);
 
   this.update = function(){
-    this.acc = createVector(random(-0.5,0.5),random(-0.5,0.5));
-    this.acc.mult(0.2);
+      this.acc.rotate(0.1);
+
+    // var mouse = createVector(mouseX, mouseY);
+    // this.acc = p5.Vector.sub(mouse,this.pos);
+    // this.acc.normalize();
     this.vel.add(this.acc);
     this.pos.add(this.vel);
   }
