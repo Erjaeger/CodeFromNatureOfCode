@@ -1,7 +1,7 @@
 var w;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(640, 360);
   w = new Walker();
 }
 
@@ -17,6 +17,8 @@ function Walker(){
   this.acc = createVector(0, 0.1);
 
   this.update = function(){
+    this.acc = createVector(random(-0.5,0.5),random(-0.5,0.5));
+    this.acc.mult(0.2);
     this.vel.add(this.acc);
     this.pos.add(this.vel);
   }
