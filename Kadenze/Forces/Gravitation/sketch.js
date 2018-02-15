@@ -1,20 +1,20 @@
 var particle;
+var attractor;
 
-function setup() {
-  createCanvas(400, 400);
-  particle = new Particle(width/2, 0, 5);
+function setup(){
+  createCanvas(640, 360);
+  particle = new Particle(200, 100, 1);
+  attractor = new Attractor(width/2, height/2);
 }
 
-function draw() {
-  background(220);
+function draw(){
+  background(51);
 
-  rect(0, height/2, width, height);
-
-
-  var gravity = createVector(0, 0.1*particle.mass);
-  particle.applyForce(gravity);
+  var force = attractor.calculateAttraction(particle);
+  particle.applyForce(force);
 
   particle.update();
-  particle.checkEdges();
   particle.display();
+
+  attractor.display();
 }

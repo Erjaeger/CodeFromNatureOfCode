@@ -1,6 +1,6 @@
 function Particle(x, y, m){
   this.pos = createVector(x, y);
-  this.vel = createVector(0.1, 0);
+  this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.mass = m;
 
