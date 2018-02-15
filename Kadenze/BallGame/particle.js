@@ -21,16 +21,29 @@ function Particle(x, y, m){
     ellipse(this.pos.x, this.pos.y, this.mass*20, this.mass*20);
   }
 
+  this.drawLineBetweenParticleAndMouse = function(){
+    var mouseV = createVector(mouseX, mouseY);
+    var mousePos = p5.Vector.sub(mouseV, this.pos);
+    push();
+    translate(this.pos.x, this.pos.y);
+    line(0, 0, mousePos.x, mousePos.y);
+    pop();
+
+    if(mouseReleased){
+      console.log("wololo")
+    }
+  }
+
   this.checkIfMouseOnParticle = function(){
     if(mouseX > (this.pos.x - (this.mass*20)/2) && mouseX < (this.pos.x + (this.mass*20)/2) && mouseY > (this.pos.y - (this.mass*20)/2) && mouseY < (this.pos.y + (this.mass*20)/2)){
-      console.log("ON DA BALL")
-      this.vel.mult(0)
-      this.acc.mult(0)
+      return true
+    } else {
+      return false;
     }
   }
 
   this.edges = function(){
-    if (this.pos.y > height){
+    if(this.pos.y > height){
       this.vel.y *= -1;
       this.pos.y = height;
     }

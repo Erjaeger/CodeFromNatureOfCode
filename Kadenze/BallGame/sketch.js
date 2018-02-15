@@ -1,5 +1,6 @@
 var particle1;
 var liquidHard, liquidMedium, liquidLow;
+var isMouseActivated = false;
 
 function setup(){
   createCanvas(640, 640);
@@ -12,17 +13,27 @@ function setup(){
 function draw(){
   background(51);
 
-  if(mouseIsPressed){
-    particle1.checkIfMouseOnParticle();
+  if(mouseIsPressed && particle1.checkIfMouseOnParticle() && !isMouseActivated){
+    isMouseActivated = true;
+  }
+
+  if(isMouseActivated){
+    particle1.drawLineBetweenParticleAndMouse();
   }
 
   var gravity1 = createVector(0, 0.2*particle1.mass);
-  particle1.applyForce(gravity1);
-  particle1.update();
+  if(!particle1.checkIfMouseOnParticle() && !isMouseActivated){
+    particle1.applyForce(gravity1);
+    particle1.update();
+  }
   particle1.edges();
   particle1.display();
 
   liquidHard.display();
   liquidMedium.display();
   liquidLow.display();
+}
+
+function mouseReleased(){
+  isMouseActivated = false;
 }
