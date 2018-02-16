@@ -1,16 +1,17 @@
 let colors = ["#2BCDC1","#38817A","#393E46","#F66095"]
+
 function Particle(x, y, m){
   this.pos = createVector(x, y);
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.mass = m;
-  this.isNew = true;
+  this.isNew = true; //If isNew there no force apply on the ball
   this.color = colors[Math.floor(random(0,4))]
 
   this.applyForce = function(force){
     var f = force.copy();
     f.div(this.mass);
-    f.x = constrain(f.x, -100, 100)
+    f.x = constrain(f.x, -100, 100) //Constrain used to limit so weird effect
     f.y = constrain(f.y, -100, 100)
     this.acc.add(f);
   }
@@ -33,18 +34,9 @@ function Particle(x, y, m){
     translate(this.pos.x, this.pos.y);
     line(0, 0, mousePos.x, mousePos.y);
     pop();
-
   }
 
-  this.checkIfMouseOnParticle = function(){
-    if(mouseX > (this.pos.x - (this.mass*20)/2) && mouseX < (this.pos.x + (this.mass*20)/2) && mouseY > (this.pos.y - (this.mass*20)/2) && mouseY < (this.pos.y + (this.mass*20)/2)){
-      return true
-    } else {
-      return false;
-    }
-  }
-
-  this.edges = function(){
+  this.edges = function(){ //check if the ball hit the border
     if(this.pos.y > height-(this.mass*20)/2){
       this.vel.y *= -1;
       this.pos.y = height-(this.mass*20)/2;

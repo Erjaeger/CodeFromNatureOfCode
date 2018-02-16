@@ -6,13 +6,13 @@ function Liquid(x, y, width, height, coef, color){
 
 	this.coef = coef;
 
-  this.contains = function(p){
+  this.contains = function(p){ // is the ball inside the liquid
   	var l = p.pos;
     return l.x > this.x && l.x < this.x + this.width &&
       		 l.y > this.y && l.y < this.y + this.height;
   }
 
-  this.calculateDrag=function(p){
+  this.calculateDrag=function(p){ //calculate the force to apply to the ball
     var speed = p.vel.mag();
     var dragMagnitude = this.coef * speed * speed;
     var dragForce = p.vel.copy();
