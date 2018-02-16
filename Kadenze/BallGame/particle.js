@@ -1,12 +1,17 @@
+let colors = ["#2BCDC1","#38817A","#393E46","#F66095"]
 function Particle(x, y, m){
   this.pos = createVector(x, y);
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.mass = m;
+  this.isNew = true;
+  this.color = colors[Math.floor(random(0,4))]
 
   this.applyForce = function(force){
     var f = force.copy();
     f.div(this.mass);
+    f.x = constrain(f.x, -100, 100)
+    f.y = constrain(f.y, -100, 100)
     this.acc.add(f);
   }
 
@@ -17,7 +22,7 @@ function Particle(x, y, m){
   }
 
   this.display = function(){
-    fill(255);
+    fill(this.color)
     ellipse(this.pos.x, this.pos.y, this.mass*20, this.mass*20);
   }
 
@@ -29,9 +34,6 @@ function Particle(x, y, m){
     line(0, 0, mousePos.x, mousePos.y);
     pop();
 
-    if(mouseReleased){
-      console.log("wololo")
-    }
   }
 
   this.checkIfMouseOnParticle = function(){
@@ -43,19 +45,19 @@ function Particle(x, y, m){
   }
 
   this.edges = function(){
-    if(this.pos.y > height){
+    if(this.pos.y > height-(this.mass*20)/2){
       this.vel.y *= -1;
-      this.pos.y = height;
+      this.pos.y = height-(this.mass*20)/2;
     }
 
-    if(this.pos.x > width){
+    if(this.pos.x > width-(this.mass*20)/2){
       this.vel.x *= -1;
-      this.pos.x = width;
+      this.pos.x = width-(this.mass*20)/2;
     }
 
-    if(this.pos.x < 0){
+    if(this.pos.x < (this.mass*20)/2){
       this.vel.x *= -1;
-      this.pos.x = 0;
+      this.pos.x = (this.mass*20)/2;
     }
   }
 }
